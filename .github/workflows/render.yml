@@ -1,0 +1,105 @@
+name: Render Video
+on:
+  workflow_dispatch:
+    inputs:
+      theme:
+        description: 'Theme: podcast or infographic or both'
+        required: true
+        default: 'podcast'
+        type: choice
+        options: [podcast, infographic, both]
+      width:
+        description: 'Output width (1080 for infographic, 1920 for podcast)'
+        default: '1920'
+        required: false
+      fps:
+        description: 'Frames per second'
+        default: '30'
+        required: false
+      audio_volume:
+        description: 'Audio volume 0.0-1.0'
+        default: '1.0'
+        required: false
+      end_pad:
+        description: 'Tail after audio ends in seconds'
+        default: '2.0'
+        required: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm install
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Check repo flat structure
+        run: node tool-check-repo.js
+
+      - name: Duration tests
+        run: node tool-test-duration.js
+
+      - name: Probe audio
+        id: probe
+        run: |
+          if ls *.mp3 *.wav *.m4a *.aac 1> /dev/null 2>&1; then
+            for f in *.mp3 *.wav *.m4a *.aac; do [ -f "$f" ] && echo "found=$f" >> $GITHUB_OUTPUT && break; done
+          else
+            echo "found=none" >> $GITHUB_OUTPUT
+          fi
+          echo "Audio file: ${{ steps.probe.outputs.found }}"
+
+      - name: Render video(s)
+        env:
+          AUDIO_VOLUME: ${{ inputs.audio_volume }}
+          END_PAD: ${{ inputs.end_pad }}
+        run: |
+          echo "Rendering theme=${{ inputs.theme }} width=${{ inputs.width }} fps=${{ inputs.fps }}"
+          if [ "${{ inputs.theme }}" = "both" ]; then
+            echo "=== Rendering podcast 1920 ==="
+            THEME=podcast WIDTH=1920 FPS=${{ inputs.fps }} AUDIO_VOLUME=${{ inputs.audio_volume }} END_PAD=${{ inputs.end_pad }} node render.js
+            echo "=== Rendering infographic 1080 ==="
+            THEME=infographic WIDTH=1080 FPS=${{ inputs.fps }} AUDIO_VOLUME=${{ inputs.audio_volume }} END_PAD=${{ inputs.end_pad }} node render.js
+            ls -lh video-*.mp4
+          else
+            if [ "${{ inputs.theme }}" = "infographic" ]; then
+              DEF_W=1080
+            else
+              DEF_W=1920
+            fi
+            W="${{ inputs.width }}"
+            if [ -z "$W" ]; then W=$DEF_W; fi
+            echo "Using width $W"
+            THEME=${{ inputs.theme }} WIDTH=$W FPS=${{ inputs.fps }} AUDIO_VOLUME=${{ inputs.audio_volume }} END_PAD=${{ inputs.end_pad }} node render.js
+            ls -lh video-*.mp4
+          fi
+
+      - name: Verify output duration with ffprobe
+        run: |
+          for v in video-*.mp4; do
+            echo "== $v =="
+            ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$v" || true
+          done
+
+      - name: Upload video artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos-${{ inputs.theme }}-${{ github.run_number }}
+          path: video-*.mp4
+          if-no-files-found: error
+          retention-days: 30
