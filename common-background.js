@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.renderBackground=function(c,t,total){c.style.background='radial-gradient(1200px 800px at 20% 10%, #fff8e1 0%, #fffdf6 50%, #e8f5e9 100%)';};

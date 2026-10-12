@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.hostConfig={skin:'medium'};

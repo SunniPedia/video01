@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.findNumbers=function(t){var re=/[\d\u09E6-\u09EF]+/g;var m,out=[];while((m=re.exec(t))!==null){out.push({value:m[0]});if(out.length>=2)break;}return out;};

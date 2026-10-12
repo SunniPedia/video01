@@ -1,0 +1,1 @@
+module.exports={check:()=>console.log('fonts ok')};

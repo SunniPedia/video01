@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.detectLang=function(txt){return 'bn';};PV.detectDirection=function(){return 'ltr';};

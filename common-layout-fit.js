@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.fitScenes=function(){document.querySelectorAll('.scene-visual').forEach(function(el){el.style.transform='scale(1)';});};

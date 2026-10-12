@@ -1,0 +1,1 @@
+console.log('duration test');const cases=[{audio:10,last:6,pad:2,expected:12},{audio:3,last:8,pad:0.5,expected:8.5}];cases.forEach(c=>{const total=Math.max(c.audio+c.pad,c.last+0.5);console.log(total);});

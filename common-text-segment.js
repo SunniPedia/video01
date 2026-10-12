@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.segmentWords=function(text){try{if(typeof Intl!=='undefined'&&Intl.Segmenter){var seg=new Intl.Segmenter(PV.lang||'bn',{granularity:'word'});var out=[];for(var it of seg.segment(text)){if(it.isWordLike)out.push(it.segment);}return out;}}catch(e){}return text.split(/\s+/);};

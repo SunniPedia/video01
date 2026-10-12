@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.buildBadge=function(src){if(!src)return null;var div=document.createElement('div');div.className='badge-wrap';var img=document.createElement('img');img.src=src;img.className='store-badge';div.appendChild(img);return div;};

@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.assignIcon=function(text){text=text||'';for(var k in PV.iconMap){var arr=PV.iconMap[k];for(var i=0;i<arr.length;i++){if(text.includes(arr[i]))return k;}}return 'light';};

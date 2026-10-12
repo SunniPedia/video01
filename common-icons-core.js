@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.iconsCore={star:'<path d="M12 2l3 8h8l-6 4 2 8-7-5-7 5 2-8-6-4h8z"/>'};

@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.computeTotal=function(scenes,audioDur,endPad){var lastEnd=0;for(var i=0;i<scenes.length;i++){if(scenes[i].end>lastEnd)lastEnd=scenes[i].end;}if(audioDur>0){return Math.max(audioDur+endPad,lastEnd+0.5);}else{return lastEnd+endPad;}};

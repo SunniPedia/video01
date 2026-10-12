@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.animateHost=function(t,isSpeaking){var mouth=document.getElementById('mouth');if(!mouth)return;if(isSpeaking){var open=Math.abs(Math.sin(t*12))*6;mouth.setAttribute('d','M85 135 Q100 '+(135+open)+' 115 135');}else{mouth.setAttribute('d','M85 135 Q100 140 115 135');}};

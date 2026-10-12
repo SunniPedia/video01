@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.numLang={bn:{more:['বেশি']}};

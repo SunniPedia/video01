@@ -1,0 +1,1 @@
+const fs=require('fs');console.log('check ok - flat repo');

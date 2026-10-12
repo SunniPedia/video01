@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.paletteFromLogo=function(){return {primary:'#1a5c2a',accent:'#c89b3c'};};

@@ -1,0 +1,39 @@
+{
+  "theme": "BOTH",
+  "brandName": "ইসলামী বিশ্বকোষ ও আল হাদিস S2",
+  "tagline": "",
+  "language": "bn",
+  "direction": "ltr",
+  "digits": "bengali",
+  "grouping": "lakh",
+  "colors": {
+    "primary": "#1a5c2a",
+    "accent": "#c89b3c",
+    "background": "#fffdf6",
+    "ink": "#1a1a1a"
+  },
+  "fonts": {
+    "main": "Noto Serif Bengali",
+    "latin": "Noto Serif"
+  },
+  "logo": {
+    "file": "logo.png",
+    "shape": "rounded",
+    "background": "white"
+  },
+  "storeTarget": "google-play",
+  "greetingText": "আসসালামু আলাইকুম ওয়ারাহমাতুল্লাহ।",
+  "host": {
+    "skin": "medium",
+    "hair": "short-dark",
+    "cap": false,
+    "beard": false,
+    "glasses": false,
+    "clothes": "collared",
+    "stripes": false,
+    "headphones": true,
+    "mic": true,
+    "faceless": false
+  },
+  "endPad": 2.0
+}

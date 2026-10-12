@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.logoMotionB=function(el,t,prog){if(!el)return;el.style.opacity=prog;el.style.transform='translateY('+(30*(1-prog))+'px) scale('+(0.95+0.05*prog)+')';};

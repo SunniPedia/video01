@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.audioEnvelope=null;PV.setAudio=function(env,fps){PV.audioEnvelope=env;};PV.getLevel=function(t){if(!PV.audioEnvelope||!PV.audioEnvelope.length)return Math.abs(Math.sin(t*3))*0.6+0.2;var idx=Math.floor(t*30);if(idx<0)idx=0;if(idx>=PV.audioEnvelope.length)return 0;return PV.audioEnvelope[idx];};

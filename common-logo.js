@@ -1,0 +1,1 @@
+window.PV=window.PV||{};PV.buildLogo=function(src){var wrap=document.createElement('div');wrap.className='logo-card';var img=document.createElement('img');img.src=src;img.className='logo-img';wrap.appendChild(img);return wrap;};
